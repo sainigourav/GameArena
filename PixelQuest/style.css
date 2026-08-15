@@ -1,0 +1,283 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --background: #080b12;
+  --panel: #111827;
+  --border: #263247;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #facc15;
+  --blue: #38bdf8;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-wrapper {
+  width: min(1280px, 100vw);
+  padding: 12px;
+}
+
+.hud {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  background: #111827;
+  border: 1px solid var(--border);
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+}
+
+.brand {
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.hud-stats {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.hud-stats span {
+  color: var(--text);
+  margin-left: 3px;
+}
+
+.game-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: calc(100vh - 130px);
+  overflow: hidden;
+  background: #70c8f4;
+  border: 1px solid var(--border);
+  touch-action: none;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 7, 18, 0.58);
+  backdrop-filter: blur(4px);
+}
+
+.hidden {
+  display: none;
+}
+
+.panel {
+  width: min(430px, 94%);
+  padding: 34px;
+  text-align: center;
+  background: rgba(17, 24, 39, 0.96);
+  border: 1px solid #334155;
+  border-radius: 22px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
+}
+
+.panel h1,
+.panel h2 {
+  margin: 8px 0 12px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.panel h1 {
+  color: var(--accent);
+  font-size: clamp(30px, 6vw, 46px);
+}
+
+.panel h2 {
+  font-size: 34px;
+}
+
+.panel p {
+  margin: 0 auto 22px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.logo-character,
+.big-icon {
+  font-size: 58px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 20px 0 26px;
+  padding: 15px;
+  background: #0b1220;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.controls span {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.controls small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  color: #111827;
+  background: var(--accent);
+  font-weight: 900;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+}
+
+button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.panel button {
+  min-width: 190px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.final-score {
+  margin: 20px 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.final-score strong {
+  color: var(--accent);
+  font-size: 30px;
+  margin-left: 8px;
+}
+
+.mobile-controls {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 4px;
+}
+
+.direction-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.mobile-controls button {
+  width: 64px;
+  height: 52px;
+  border-radius: 14px;
+  color: white;
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+.mobile-controls .jump-button {
+  width: 100px;
+  color: #111827;
+  background: var(--accent);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding-top: 9px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+@media (max-width: 700px) {
+  .game-wrapper {
+    padding: 0;
+  }
+
+  .hud {
+    height: 48px;
+    padding: 0 10px;
+    border-radius: 0;
+  }
+
+  .brand {
+    font-size: 13px;
+  }
+
+  .hud-stats {
+    gap: 8px;
+    font-size: 10px;
+  }
+
+  .game-container {
+    aspect-ratio: 16 / 10;
+    max-height: none;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .mobile-controls {
+    display: flex;
+  }
+
+  footer {
+    display: none;
+  }
+
+  .panel {
+    padding: 24px;
+  }
+
+  .logo-character {
+    font-size: 42px;
+  }
+}
