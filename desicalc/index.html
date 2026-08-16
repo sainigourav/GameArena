@@ -9,22 +9,27 @@
 <body>
   <main class="app">
     <section class="calculator">
+
       <header class="header">
         <div>
           <div class="eyebrow">MONEY CALCULATOR</div>
           <h1>Stakeholder Interest</h1>
-          <p>Calculate interest charged per ₹100 every month.</p>
+          <p>Simple monthly and date-wise interest calculation.</p>
         </div>
+
         <div class="rupee-icon">₹</div>
       </header>
 
       <section class="input-section">
+
         <div class="section-title">Loan Details</div>
 
         <div class="field">
           <label for="principal">Principal Amount</label>
+
           <div class="input-wrapper">
             <span>₹</span>
+
             <input
               id="principal"
               type="number"
@@ -36,25 +41,62 @@
           </div>
         </div>
 
-        <div class="rate-duration-row">
-          <div class="field">
-            <label for="rate">Interest Rate</label>
-            <div class="input-wrapper rate-input">
-              <span>₹</span>
-              <input
-                id="rate"
-                type="number"
-                min="0"
-                step="0.01"
-                value="2"
-                placeholder="2"
-              >
-              <small>/ ₹100 / month</small>
-            </div>
-          </div>
+        <div class="field">
+          <label for="rate">Interest Rate</label>
 
+          <div class="input-wrapper rate-input">
+            <span>₹</span>
+
+            <input
+              id="rate"
+              type="number"
+              min="0"
+              step="0.01"
+              value="2"
+              placeholder="2"
+            >
+
+            <small>/ ₹100 / month</small>
+          </div>
+        </div>
+
+        <div class="calculation-type">
+          <label>Calculation Type</label>
+
+          <div class="type-options">
+            <label class="type-option">
+              <input
+                id="monthlyMode"
+                type="radio"
+                name="calculationType"
+                value="monthly"
+              >
+              <span>
+                <strong>Monthly</strong>
+                <small>Calculate by number of months</small>
+              </span>
+            </label>
+
+            <label class="type-option active">
+              <input
+                id="dateMode"
+                type="radio"
+                name="calculationType"
+                value="date"
+                checked
+              >
+              <span>
+                <strong>Date Range</strong>
+                <small>Calculate between two dates</small>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div id="monthlyFields" class="calculation-fields hidden">
           <div class="field">
             <label for="duration">Duration</label>
+
             <div class="input-wrapper">
               <input
                 id="duration"
@@ -64,6 +106,7 @@
                 value="12"
                 placeholder="12"
               >
+
               <select id="durationUnit" aria-label="Duration unit">
                 <option value="months">Months</option>
                 <option value="years">Years</option>
@@ -72,86 +115,156 @@
           </div>
         </div>
 
+        <div id="dateFields" class="calculation-fields">
+
+          <div class="date-row">
+
+            <div class="field">
+              <label for="startDate">From Date</label>
+
+              <div class="input-wrapper date-input">
+                <input id="startDate" type="date">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="endDate">To Date</label>
+
+              <div class="input-wrapper date-input">
+                <input id="endDate" type="date">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
         <div class="example-note">
           <span class="info-icon">i</span>
+
           <span>
-            ₹2 per ₹100 means ₹2 interest for every ₹100 of principal,
-            charged every month.
+            ₹2 per ₹100 means ₹2 interest for every ₹100 of principal
+            for one month. For daily calculation, the monthly interest
+            is divided by 30 days. Both selected dates are included.
           </span>
         </div>
 
-        <button id="calculateButton" class="calculate-button" type="button">
+        <button
+          id="calculateButton"
+          class="calculate-button"
+          type="button"
+        >
           Calculate Interest
         </button>
+
       </section>
 
       <section class="result-section">
+
         <div class="section-title">Calculation Summary</div>
 
         <div class="main-result">
+
           <div>
             <span class="result-label">Total Interest</span>
-            <strong id="totalInterest">₹24,000</strong>
+            <strong id="totalInterest">₹0.00</strong>
           </div>
-          <div class="interest-badge" id="interestPercentage">24%</div>
+
+          <div
+            id="interestPercentage"
+            class="interest-badge"
+          >
+            0%
+          </div>
+
         </div>
 
         <div class="result-grid">
+
           <div class="result-card">
             <span>Principal</span>
-            <strong id="resultPrincipal">₹1,00,000</strong>
+            <strong id="resultPrincipal">₹0.00</strong>
           </div>
 
           <div class="result-card">
             <span>Monthly Interest</span>
-            <strong id="monthlyInterest">₹2,000</strong>
+            <strong id="monthlyInterest">₹0.00</strong>
           </div>
 
           <div class="result-card">
-            <span>Duration</span>
-            <strong id="resultDuration">12 Months</strong>
+            <span id="durationLabel">Duration</span>
+            <strong id="resultDuration">—</strong>
+          </div>
+
+          <div class="result-card">
+            <span>Daily Interest</span>
+            <strong id="dailyInterest">₹0.00</strong>
           </div>
 
           <div class="result-card total-card">
             <span>Total Repayment</span>
-            <strong id="totalRepayment">₹1,24,000</strong>
+            <strong id="totalRepayment">₹0.00</strong>
           </div>
+
         </div>
+
       </section>
 
       <section class="schedule-section">
+
         <div class="schedule-header">
+
           <div>
             <div class="section-title">Payment Schedule</div>
-            <p>Monthly interest and principal repayment</p>
+            <p id="scheduleDescription">
+              Daily interest and principal repayment
+            </p>
           </div>
-          <button id="toggleSchedule" class="toggle-button" type="button">
-            Show Schedule
+
+          <button
+            id="toggleSchedule"
+            class="toggle-button"
+            type="button"
+          >
+            Hide Schedule
           </button>
+
         </div>
 
-        <div id="scheduleContainer" class="schedule-container hidden">
+        <div id="scheduleContainer" class="schedule-container">
+
           <div class="table-wrapper">
+
             <table>
               <thead>
                 <tr>
-                  <th>Month</th>
+                  <th id="periodHeader">Date</th>
                   <th>Interest</th>
                   <th>Principal</th>
                   <th>Total Payment</th>
                   <th>Balance</th>
                 </tr>
               </thead>
+
               <tbody id="scheduleBody"></tbody>
             </table>
+
           </div>
+
         </div>
+
       </section>
 
       <footer>
-        <span>Simple non-compounding monthly interest</span>
-        <button id="resetButton" type="button">Reset</button>
+        <span id="calculationFooter">
+          Non-compounding interest • 30 days = 1 month
+        </span>
+
+        <button id="resetButton" type="button">
+          Reset
+        </button>
       </footer>
+
     </section>
   </main>
 
